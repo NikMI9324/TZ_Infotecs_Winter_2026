@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TZ_Infotecs_Winter_2026.Api/TZ_Infotecs_Winter_2026.Api.csproj" />
+  <Project Path="TZ_Infotecs_Winter_2026.Application/TZ_Infotecs_Winter_2026.Application.csproj" />
+  <Project Path="TZ_Infotecs_Winter_2026.Domain/TZ_Infotecs_Winter_2026.Domain.csproj" />
+  <Project Path="TZ_Infotecs_Winter_2026.Infrastructure/TZ_Infotecs_Winter_2026.Infrastructure.csproj" />
+</Solution>
