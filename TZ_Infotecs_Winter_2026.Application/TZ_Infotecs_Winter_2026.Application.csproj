@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TZ_Infotecs_Winter_2026.Infrastructure\TZ_Infotecs_Winter_2026.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.9" />
+  </ItemGroup>
+
 </Project>
