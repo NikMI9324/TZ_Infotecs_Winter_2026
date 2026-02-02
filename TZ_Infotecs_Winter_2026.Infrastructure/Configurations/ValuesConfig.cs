@@ -24,6 +24,9 @@ namespace TZ_Infotecs_Winter_2026.Infrastructure.Configurations
             builder.Property(v => v.Date)
                 .HasColumnName("date")
                 .HasColumnType("timestamp with time zone")
+                .HasConversion(
+                    v => v.ToUniversalTime(),
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc))
                 .IsRequired();
 
             builder.Property(v => v.ExecutionTime)

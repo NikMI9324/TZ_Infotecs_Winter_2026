@@ -33,7 +33,6 @@ namespace TZ_Infotecs_Winter_2026.Application.Services
             var values = new List<Value>();
             using var reader = new StreamReader(file.OpenReadStream());
 
-            var lines = new List<string>();
             await using var transaction = await _context.Database.BeginTransactionAsync();
             while (!reader.EndOfStream)
             {
@@ -51,7 +50,9 @@ namespace TZ_Infotecs_Winter_2026.Application.Services
                     Id = Guid.NewGuid(),
                     Date = row.Date,
                     ExecutionTime = row.ExecutionTime,
-                    ValueDefinition = row.Value
+                    ValueDefinition = row.Value,
+                    FileName = file.FileName
+
                 };
                 values.Add(value);
             }
@@ -72,6 +73,7 @@ namespace TZ_Infotecs_Winter_2026.Application.Services
                 MinimalDate = values.Min(v => v.Date)
             };
             await _resultRepo.AddOrUpdateAsync(result);
+
             await transaction.CommitAsync();
         }
         private static double GetMedian(IEnumerable<double> values)

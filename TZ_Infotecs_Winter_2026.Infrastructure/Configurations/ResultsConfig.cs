@@ -18,7 +18,10 @@ namespace TZ_Infotecs_Winter_2026.Infrastructure.Configurations
 
             builder.Property(r => r.MinimalDate)
                 .HasColumnName("minimal_date")
-                .HasColumnType("timestamp with time zone");
+                .HasColumnType("timestamp with time zone")
+                .HasConversion(
+                    v => v.ToUniversalTime(),
+                    v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
 
             builder.Property(r => r.MedianValueDefinition)
                 .HasColumnName("median_value_definition");

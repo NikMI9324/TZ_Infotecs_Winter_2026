@@ -49,8 +49,12 @@ namespace TZ_Infotecs_Winter_2026.Application.CsvValidator
         {
             row = null;
             validationResults = new List<ValidationResult>();
-            if(parts.ValidateCsvRow(out var date, out var execTime, out var val) != ValidationResult.Success)
+            var basicResult = parts.ValidateCsvRow(out var date, out var execTime, out var val);
+            if (basicResult != ValidationResult.Success)
+            {
+                validationResults.Add(basicResult);
                 return false;
+            }
 
             try
             {
@@ -63,8 +67,9 @@ namespace TZ_Infotecs_Winter_2026.Application.CsvValidator
                 }
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                validationResults.Add(new ValidationResult($"Внутренняя ошибка при создании объекта: {ex.Message}"));
                 row = null;
                 return false;
             }
