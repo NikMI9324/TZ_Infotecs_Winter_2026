@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using TZ_Infotecs_Winter_2026.Domain.Entities;
 
 namespace TZ_Infotecs_Winter_2026.Infrastructure.Data

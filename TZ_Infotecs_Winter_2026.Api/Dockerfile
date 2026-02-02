@@ -30,4 +30,5 @@ RUN dotnet publish "./TZ_Infotecs_Winter_2026.Api.csproj" -c $BUILD_CONFIGURATIO
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "TZ_Infotecs_Winter_2026.Api.dll"]

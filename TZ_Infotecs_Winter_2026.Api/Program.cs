@@ -6,7 +6,7 @@ using TZ_Infotecs_Winter_2026.Infrastructure.Data;
 using TZ_Infotecs_Winter_2026.Infrastructure.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var connectionString = Environment.GetEnvironmentVariable("ConnextionString__DefaultConnection");
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MyAppContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    //var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseNpgsql(connectionString,
         m => m.MigrationsAssembly("TZ_Infotecs_Winter_2026.Infrastructure"));
 });
@@ -26,6 +26,25 @@ builder.Services.AddScoped<ICsvFileReader, CsvFileReader>();
 builder.Services.AddScoped<IResultFiltrationService, ResultFiltrationService>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<MyAppContext>();
+    var maxTries = 10;
+    for(int i =0; i < maxTries; i++)
+    {
+        try
+        {
+            context.Database.Migrate();
+        }
+        catch {
+            if(i == maxTries - 1)
+                break;
+            await Task.Delay(5000);
+        }
+    }
+}
+
 
 if (app.Environment.IsDevelopment())
 {

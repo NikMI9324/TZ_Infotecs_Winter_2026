@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
-using System.Text;
 using TZ_Infotecs_Winter_2026.Application.CsvValidator;
 using TZ_Infotecs_Winter_2026.Application.Interfaces;
 using TZ_Infotecs_Winter_2026.Domain.Entities;
